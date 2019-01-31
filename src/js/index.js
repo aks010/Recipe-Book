@@ -72,11 +72,11 @@ elements.searchForm.addEventListener('submit', e => {
 const controlRecipe = async () => {
     //Get ID from url
     const id = window.location.hash.replace('#','');
-    // console.log(id);
+    console.log(id);
 
     if(id) {
         // Prepare UI for changes
-
+        recipeView.clearRecipe();
         // Create new recipe object
         state.recipe = new Recipe(id);
         
@@ -85,6 +85,7 @@ const controlRecipe = async () => {
 
         try{
             // Get recipe data
+            renderLoader(elements.recipeContainer);
             await state.recipe.getRecipe();
 
             // Calculate servings and time
@@ -92,10 +93,15 @@ const controlRecipe = async () => {
             state.recipe.calcServings();
             state.recipe.parseIngredients();
             // Render recipe
-            console.log(state.recipe);
+            // console.log(state.recipe.result());
+
+            recipeView.renderRecipe(state.recipe.result());
+            clearLoader();
+
         } catch (err) {
             console.log(err);
             alert('Error Processing Recipe!');
+            clearLoader();
         }
     }
 }

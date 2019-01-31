@@ -1,16 +1,17 @@
 export const elements = {
     searchInput: document.querySelector('.search__field'),
     searchForm: document.querySelector('.search'),
-    searchRes: document.querySelector('.results'),           
+    searchRes: document.querySelector('.results'),
     searchResList: document.querySelector('.results__list'),
     searchResPages: document.querySelector('.results__pages'),
     
-    recipeContainer: document.querySelector('.recipe')
+    recipeContainer: document.querySelector('.recipe'),
 }
 
 export const elementStrings = {
     loader: 'loader',
     ResBtn: 'results__btn--prev',
+    recipeIngredientList: '.recipe__ingredient-list',
 }
 
 export const renderLoader = parent => {
@@ -24,6 +25,6 @@ export const renderLoader = parent => {
     parent.insertAdjacentHTML('afterbegin', loader);
 }
 
-export const clearLoader = parent => {
+export const clearLoader = () => {
     document.querySelector(`.${elementStrings.loader}`).remove();
 }
