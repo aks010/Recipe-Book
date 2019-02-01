@@ -4,6 +4,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
 
 import Recipe from './models/Recipe';
 import * as recipeView from './views/recipeView';
+import * as shoppingListView from './views/shoppingListView';
 
 /** Global state of the app 
  *- Search object
@@ -72,7 +73,7 @@ elements.searchForm.addEventListener('submit', e => {
 const controlRecipe = async () => {
     //Get ID from url
     const id = window.location.hash.replace('#','');
-    console.log(id);
+    // console.log(id);
 
     if(id) {
         // Prepare UI for changes
@@ -87,7 +88,7 @@ const controlRecipe = async () => {
             // Get recipe data
             renderLoader(elements.recipeContainer);
             await state.recipe.getRecipe();
-
+            console.log(state.recipe.ingredients);
             // Calculate servings and time
             state.recipe.calcTime();
             state.recipe.calcServings();
@@ -111,10 +112,20 @@ const controlRecipe = async () => {
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+const controlShoppingList = () => {
+    // console.log('I am called');
+    state.shoppingIngredients = state.recipe.ingredients;
+    // console.log(state.shoppingIngredients);
+    shoppingListView.renderList(state.shoppingIngredients);
+    
+}
 
-
-
-
+elements.recipeContainer.addEventListener('click', e => {
+     if(e.target.classList.contains('recipe__btn') || e.target.parentElement.classList.contains('recipe__btn')) {
+         controlShoppingList();
+         console.log('CLicked');
+    }
+})
 
 
 

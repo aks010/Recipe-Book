@@ -43,7 +43,7 @@ const renderIngredient = (ings) => {
 } 
 
 export const renderRecipe = (recipe) => {
-    // console.log(recipe.ingredients);
+    console.log(recipe.ingredients);
     elements.recipeContainer.insertAdjacentHTML("afterbegin",`
         <figure class="recipe__fig">
                 <img src=${recipe.img} alt="Tomato" class="recipe__img">

@@ -54,13 +54,18 @@ export default class Recipe {
                 const arrCount = arrIng.slice(0, unitIndex);
                 let count;
                 if(arrCount.length === 1) {
+                    // console.log(arrIng[0]);
                     count = eval(arrIng[0].replace('-','+'));
+                    // console.log(arrIng[0]);
+                    // console.log(count);
+                    // console.log(parseFloat(count));
+                    // console.log(ingredient);
                 } else {
                     count = eval(arrIng.slice(0, unitIndex).join('+'))
                 }
 
                 objIng = {
-                    count: parseInt(count, 10),
+                    count: parseFloat(count, 10).toFixed(2),
                     unit: arrIng[unitIndex],
                     ingredient: arrIng.splice(unitIndex + 1).join(' ')
                 }
