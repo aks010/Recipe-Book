@@ -1,5 +1,9 @@
 import { elements } from './base'
 
+export const clearList = () => {
+    elements.shoppingList.innerHTML = '';
+}
+
 export const renderList = (ingredients) => {
     let markup = '';
 
@@ -22,4 +26,9 @@ export const renderList = (ingredients) => {
         
     });
     elements.shoppingList.insertAdjacentHTML("afterbegin", markup);
+}
+
+export const deteleItem = target => {
+    // console.log(target);
+    target.parentElement.remove();
 }

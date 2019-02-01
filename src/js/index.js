@@ -78,6 +78,7 @@ const controlRecipe = async () => {
     if(id) {
         // Prepare UI for changes
         recipeView.clearRecipe();
+        shoppingListView.clearList();
         // Create new recipe object
         state.recipe = new Recipe(id);
         
@@ -112,6 +113,10 @@ const controlRecipe = async () => {
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
+
+/**
+ * SHOPPING LIST CONTROLLER
+ */
 const controlShoppingList = () => {
     // console.log('I am called');
     state.shoppingIngredients = state.recipe.ingredients;
@@ -120,8 +125,15 @@ const controlShoppingList = () => {
     
 }
 
+elements.shoppingList.addEventListener('click', e => {
+    let deleteTarget =  e.target.closest('.shopping__delete');
+    shoppingListView.deteleItem(deleteTarget);
+    // console.log(deleteTarget.parentElement);
+})
+
 elements.recipeContainer.addEventListener('click', e => {
-     if(e.target.classList.contains('recipe__btn') || e.target.parentElement.classList.contains('recipe__btn')) {
+    // console.log(e.target.closest('.recipe__ingredients'));
+     if(e.target.classList.contains('recipe__btn') || e.target.parentElement.classList.contains('recipe__btn')&& e.target.closest('.recipe__ingredients')) {
          controlShoppingList();
          console.log('CLicked');
     }
